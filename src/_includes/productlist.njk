@@ -14,9 +14,7 @@
             >{{ price.product.name }}</a
           >
         </h3>
-        <img src="{% src price.product.metadata.mainImage %}"
-          srcset="{% srcset price.product.metadata.mainImage %}"
-          alt="">
+        <img src="{{ price.product.images[0] }}" alt="">
         <p>{{ price.product.description }}</p>
         <form action="/api/createCheckoutSession" method="POST">
           <input
