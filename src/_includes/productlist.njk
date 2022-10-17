@@ -16,18 +16,13 @@
         </h3>
         <img src="{{ price.product.images[0] }}" alt="">
         <p>{{ price.product.description }}</p>
-        <form action="/api/createCheckoutSession" method="POST">
-          <input
-            type="hidden"
-            value="{{ price.id }}"
-            name="price_id"
-            class="hidden"
-          />
+        <stripe-cart-additem price-id="{{price.id}}">
           <button class="button" type="submit">Buy now {{ price.unit_amount | convertCentsToDollars }}</button>
-        </form>
+        </stripe-cart-additem>
       </li>
       {% endfor %}
     </ol>
   </div>
 </section>
+<section>This is where cart goes <stripe-cart></stripe-cart></section>
 {% endif %}
