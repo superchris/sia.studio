@@ -1,8 +1,7 @@
 {% if prices.length %}
-<section class="[ pad-top-700 gap-bottom-900 ]">
+<section class="[ gap-bottom-900 ]">
   <div class="[ inner-wrapper ] [ sf-flow ]">
     <h2 class="[ post-list__heading ] [ text-700 md:text-800 ]">Products</h2>
-    <p>Please see our <a href="/faq">frequently asked questions</a> for details on how digital downloads are delivered and our return policy.</p>
     <ol class="[ pad-top-300 ] [ product ] [ ol-reset ]">
       {% for price in prices %}
       <li class="product-card sf-flow">
@@ -24,5 +23,4 @@
     </ol>
   </div>
 </section>
-<section>This is where cart goes <stripe-cart></stripe-cart></section>
 {% endif %}

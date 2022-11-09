@@ -315,7 +315,6 @@ h2:hover .direct-link {
 }
 .product img {
   width: 100%;
-  aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 .product .button {
