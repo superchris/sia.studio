@@ -1,15 +1,77 @@
----
-layout: layouts/base.njk
-title: Shop Sia.Studio
-tags:
-  - nav
-navtitle: Shop
-templateClass: tmpl-post
----
+<!doctype html>
+<html lang="en">
 
-{% set introHeading = title %} {% set introSummary %}{{ content | safe }}{%
-endset %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>sia.studio | {{ renderData.title or title or metadata.title }}</title>
+  <meta name="description" content="{{ renderData.description or description or metadata.description }}">
+  <meta property="og:description" content="{{ renderData.description or description or metadata.description }}" />
 
-<main id="main-content" tabindex="-1">
-  {% include "productlist.njk" %}
-</main>
+  <link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+  <!-- Global site tag (gtag.js) - Google Analytics for sia.studio-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-87PQLQM16V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-87PQLQM16V');
+  </script>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/themes/light.css" />
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.83/dist/shoelace.js"></script>
+  <script type="module" src="/javascript/index.js"></script>
+
+  <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
+  <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
+
+  <link rel="icon" href="/images/favicon.png" type="image/png" />
+  <link rel="canonical" href="https://sia.studio{{ page.url }}">
+
+  <meta name="monetization" content="$pay.stronghold.co/1a1a6b5138fcdc84cb29d9b04a798e65540">
+
+  <link rel="preload" as="font" type="font/woff2" href="/css/fonts/josefin-sans-v14-latin-700.woff2" crossorigin>
+</head>
+
+<body>
+
+  <main id="main-content" tabindex="-1">
+    <header role="banner" class="[ site-head ] [ pad-top-700 ">
+      <div class="wrapper">
+        <div class="[ site-head__inner ] [ md:box-flex space-between align-center ]">
+          <a href="/" class="[ site-head__site-name ] [ leading-tight ]" {{ 'aria-current=page' if page.url=='/' | safe
+            }}>
+            <span class="visually-hidden">{{ 'Back to homepage' if page.url != '/' else 'Homepage' }}</span>
+            <img src="/images/launch-scout-logo.png" width="80" />
+          </a>
+          <stripe-cart store-id="7d7e7f4f-fd2e-44a7-bf50-ff7e6f49cb86" url="wss://stripe-cart.onrender.com/socket">
+          </stripe-cart>
+        </div>
+      </div>
+    </header>
+    <section class="[ gap-bottom-900 ]">
+      <div class="[ inner-wrapper ] [ sf-flow ]">
+        <h2 class="[ post-list__heading ] [ text-700 md:text-800 ]">Products</h2>
+        <ol class="[ pad-top-300 ] [ product ] [ ol-reset ]">
+          {% for price in prices %}
+          <li class="product-card sf-flow">
+            <h3 class="font-base leading-tight text-600 weight-mid">
+              <a href="{{ price.product.url }}" class="post-list__link" rel="bookmark">{{ price.product.name }}</a>
+            </h3>
+            <img src="{{ price.product.images[0] }}" alt="">
+            <p>{{ price.product.description }}</p>
+            <stripe-cart-additem price-id="{{price.id}}">
+              <button class="button" type="submit">Add to cart {{ price.unit_amount | convertCentsToDollars }}</button>
+            </stripe-cart-additem>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
