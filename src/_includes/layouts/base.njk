@@ -37,18 +37,6 @@
 </head>
 
 <body>
-  <header role="banner" class="[ site-head ] [ pad-top-700 ">
-    <div class="wrapper">
-      <div class="[ site-head__inner ] [ md:box-flex space-between align-center ]">
-        <a href="/" class="[ site-head__site-name ] [ leading-tight ]" {{ 'aria-current=page' if page.url=='/' | safe
-          }}>
-          <span class="visually-hidden">{{ 'Back to homepage' if page.url != '/' else 'Homepage' }}</span>
-          <img src="/images/launch-scout-logo.png" width="80" />
-        </a>
-        <stripe-cart store-id="7d7e7f4f-fd2e-44a7-bf50-ff7e6f49cb86" url="wss://stripe-cart.onrender.com/socket"></stripe-cart>
-      </div>
-    </div>
-  </header>
 
   {{ content | safe }}
 
